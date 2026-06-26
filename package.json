@@ -1,0 +1,9 @@
+{
+  "name": "memo-day-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local personal memo schedule tool.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
