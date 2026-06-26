@@ -34,20 +34,6 @@ http://127.0.0.1:4173/index.html
 Memo Day.command
 ```
 
-## 作业文档
-
-Codex 第三节课作业文档见：
-
-```txt
-docs/homework.md
-```
-
-项目沉淀 Skill 见：
-
-```txt
-docs/project-skill.md
-```
-
 ## 数据
 
 日程保存在本地文件：
