@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1d2630" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Memo Day" />
+    <title>个人便签日程</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="个人日程工具">
+        <aside class="note-panel" aria-label="新增事项">
+          <div class="brand-row">
+            <div>
+              <p class="eyebrow">Memo Day</p>
+              <h1>今天要做什么</h1>
+            </div>
+            <button class="icon-button" id="clearForm" type="button" aria-label="清空表单" title="清空">
+              ×
+            </button>
+          </div>
+
+          <form id="taskForm" class="sticky-note">
+            <label>
+              <span>事情</span>
+              <textarea id="taskTitle" rows="3" maxlength="80" placeholder="写下一个待办事项" required></textarea>
+            </label>
+
+            <div class="form-grid">
+              <label>
+                <span>开始时间</span>
+                <input id="startTime" type="time" required />
+              </label>
+              <label>
+                <span>持续</span>
+                <select id="duration" required>
+                  <option value="5">5 分钟</option>
+                  <option value="10">10 分钟</option>
+                  <option value="15">15 分钟</option>
+                  <option value="30">30 分钟</option>
+                  <option value="45">45 分钟</option>
+                  <option value="60" selected>1 小时</option>
+                  <option value="90">1.5 小时</option>
+                  <option value="120">2 小时</option>
+                  <option value="180">3 小时</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              <span>日期</span>
+              <input id="taskDate" type="date" required />
+            </label>
+
+            <div class="palette-row" aria-label="事项颜色">
+              <button class="color-chip active" type="button" data-color="mint" aria-label="绿色"></button>
+              <button class="color-chip" type="button" data-color="blue" aria-label="蓝色"></button>
+              <button class="color-chip" type="button" data-color="peach" aria-label="桃色"></button>
+              <button class="color-chip" type="button" data-color="violet" aria-label="紫色"></button>
+            </div>
+
+            <button class="primary-button" type="submit">添加到日程</button>
+            <p id="saveStatus" class="save-status" aria-live="polite">已准备本地保存</p>
+          </form>
+
+          <section class="mini-calendar" aria-label="历史日历">
+            <div class="calendar-head">
+              <button class="icon-button" id="prevMonth" type="button" aria-label="上个月">‹</button>
+              <strong id="monthLabel"></strong>
+              <button class="icon-button" id="nextMonth" type="button" aria-label="下个月">›</button>
+            </div>
+            <div class="weekdays" aria-hidden="true">
+              <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+            </div>
+            <div id="calendarGrid" class="calendar-grid"></div>
+          </section>
+        </aside>
+
+        <section class="schedule-panel" aria-label="每日时间表">
+          <header class="schedule-toolbar">
+            <button class="pill-button" id="todayButton" type="button">今天</button>
+            <div class="day-nav">
+              <button class="nav-button" id="prevDay" type="button" aria-label="前一天">‹</button>
+              <button class="date-title" id="dateTitle" type="button" aria-label="选择日期"></button>
+              <button class="nav-button" id="nextDay" type="button" aria-label="后一天">›</button>
+            </div>
+            <input class="hidden-date" id="datePicker" type="date" aria-label="选择日期" />
+          </header>
+
+          <div class="timeline-wrap">
+            <div class="timezone">GMT+8</div>
+            <div id="timeline" class="timeline" aria-live="polite"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="eventTemplate">
+      <article class="event-card">
+        <button class="delete-event" type="button" aria-label="删除事项">×</button>
+        <button class="open-note" type="button" aria-label="查看或添加备注">便签</button>
+        <strong></strong>
+        <span></span>
+        <button class="resize-event" type="button" aria-label="拖动调整时长"></button>
+      </article>
+    </template>
+
+    <div id="noteDialog" class="note-dialog" role="dialog" aria-modal="true" aria-labelledby="noteDialogTitle" hidden>
+      <div class="note-dialog__backdrop" data-close-note></div>
+      <section class="note-dialog__panel">
+        <header class="note-dialog__head">
+          <div>
+            <p id="noteDialogTime" class="eyebrow"></p>
+            <h2 id="noteDialogTitle">时间段备注</h2>
+          </div>
+          <button class="icon-button" id="closeNoteDialog" type="button" aria-label="关闭备注">×</button>
+        </header>
+        <label class="note-editor-label">
+          <span>记录信息</span>
+          <textarea id="eventNoteInput" rows="8" maxlength="1200" placeholder="写下这段时间得到的信息、完成的事情，或后续要回顾的线索"></textarea>
+        </label>
+        <footer class="note-dialog__actions">
+          <button class="secondary-button" id="clearEventNote" type="button">清空备注</button>
+          <button class="primary-button" id="saveEventNote" type="button">保存备注</button>
+        </footer>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
