@@ -1,0 +1,19 @@
+{
+  "name": "Memo Day 个人便签日程",
+  "short_name": "Memo Day",
+  "description": "本地运行的个人便签日程工具",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f5ee",
+  "theme_color": "#1d2630",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
